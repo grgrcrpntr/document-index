@@ -6,33 +6,57 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/** Class for converting index entries (files and dirs) into HTML markups.
+ * Includes CSS definition which shall be externalized in future versions.
+ */
 public class HTMLFile {
 	
-	String _htmlfile;
-	String _htmlContent;
+	// ----------------------
+	// Attributes
+	// ----------------------
 	
+	private String _htmlfile;
+	private String _htmlContent;
+	
+	// ----------------------
+	// Constructor
+	// ----------------------
+	
+	/** Creates new HTML file with empty content
+	* @param htmlfile	file name
+	*/
 	public HTMLFile(String htmlfile) {
 		_htmlfile = htmlfile;
 		_htmlContent = "";
 	}
 	
+	/** Dump HTML content as String (mainly used for debugging in console).
+	* @return	TML content as String
+	*/
 	public String dump() {
 		return _htmlContent;
 	}
 	
+	/** Dump HTML file to disk
+	*/
 	public void toDisk() {
 		
-		File file =new File(_htmlfile); 
+		File file = new File(_htmlfile); 
+		
 		try {
-			// Creation du fichier
+			
+			// Create a file
 			file.createNewFile();
-	        // creation d'un writer (un écrivain)
+	        
+			// Create a writer
 	        final FileWriter writer = new FileWriter(file);
+	        
 	        try {
+	        	// Write HTML Content in file
 	        	writer.write(_htmlContent);
 	        }
 	        finally {
-	            // quoiqu'il arrive, on ferme le fichier
+	            // Whatever happens, file will be closed
 	            writer.close();
 	        }
 	    }
@@ -41,6 +65,9 @@ public class HTMLFile {
 	    } 
 	}
 	
+	/** Init HTML file (creates title, favicon, style and head)
+	* @param String	HTML Page title
+	*/
 	public void initFile(String title) {
 		
 		_htmlContent = "<html lang=\"en\">\n";
@@ -52,10 +79,16 @@ public class HTMLFile {
 		
 	}
 	
+	/** Add file entry to HTML index file
+	* @param String	File path
+	*/
 	public void addFileEntry(String filepath) {
 		_htmlContent += "<a href=\"" + filepath +  "\">" + filepath.substring(filepath.lastIndexOf("\\") + 1) + "</a><br/>\n";
 	}
 	
+	/** Add directory entry to HTML index file
+	* @param String	Directory path
+	*/
 	public void addDirectory(String dirname, int level) {
 		String openMarkup, closeMarkup;
 		if(level > 6) level = 6;
