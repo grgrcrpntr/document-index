@@ -2,7 +2,7 @@ package com.effisoft.docindex;
 
 /** Main class of document index generator.
  * Contains main() method.
- * SHould be exported as an runnable JAR file.
+ * Should be exported as an runnable JAR file.
  */
 public class DocumentIndex {
 
