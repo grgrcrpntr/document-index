@@ -30,6 +30,11 @@ public class HTMLFile {
 		_htmlContent = "";
 	}
 	
+	// ----------------------
+	// Public methods
+	// ----------------------
+		
+	
 	/** Dump HTML content as String (mainly used for debugging in console).
 	* @return	TML content as String
 	*/
@@ -90,25 +95,42 @@ public class HTMLFile {
 	* @param String	Directory path
 	*/
 	public void addDirectory(String dirname, int level) {
+		
 		String openMarkup, closeMarkup;
+		
+		// Turn directory tree level into <h*> markup
 		if(level > 6) level = 6;
 		openMarkup = "<h" + level + ">";
 		closeMarkup = "</h" + level + ">";
+		
 		_htmlContent += openMarkup + dirname.substring(dirname.lastIndexOf("\\")) + closeMarkup + "\n";
 	}
 	
+	/** Close HTML file (add footer)
+	*/
 	public void closeFile() {
 		addFooter();
 	}
 	
+	// ----------------------
+	// Private methods
+	// ----------------------
+	
+	/** Add HTML tile
+	* @param String	Title
+	*/
 	private void addTitle(String title) {
 		_htmlContent+= "<title>" + title.substring(title.lastIndexOf("\\")) + "</title>\n";
 	}
 	
+	/** Add Favicon
+	*/
 	private void addFavicon() {
 		_htmlContent+= "<link href=\"http://www.effisoft.com/templates/t3_bs3_blank/favicon.ico\" rel=\"shortcut icon\" type=\"image/vnd.microsoft.icon\" />\n";
 	}
 	
+	/** Add CSS
+	*/
 	private void addStyle() {
 		_htmlContent += "<style>\n"
 				+ "	* {  box-sizing: border-box; }\n"
@@ -127,17 +149,26 @@ public class HTMLFile {
 				+ "</style>\n";
 	}
 	
+	/** Add HTML header (incl. page title)
+	* @param String	Title
+	*/
 	private void addHeader(String title) {
 		_htmlContent += "<body>\n<header>";
 		_htmlContent+= title.substring(title.lastIndexOf("\\"));
 		_htmlContent+= "</header>\n<section>\n<nav></nav>\n<article>\n";
 	}
 	
+	/** Add HTML page footer
+	*/
 	private void addFooter() {
+		
 		_htmlContent += "</article>\n</section>\n";
+		
+		// Compute index generation date
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		Date date = new Date();
 		_htmlContent += "<footer>Last generated on " + dateFormat.format(date) + "</footer>\n";
+		
 		_htmlContent += "</body>\n</html>";
 	}
 
