@@ -1,9 +1,16 @@
 package com.effisoft.docindex;
 
+/** Main class of document index generator.
+ * Contains main() method.
+ * SHould be exported as an runnable JAR file.
+ */
 public class DocumentIndex {
 
+	/** Main method: Generates HTML index file from input dir.
+	 * See Command line syntax in https://github.com/grgrcrpntr/document-index/blob/master/README.md
+	 * @param args	1: Input directory, 2: Output file, 3: PDF option.
+	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		
 		try {
 			
