@@ -15,7 +15,9 @@ public class HTMLFile {
 	// Attributes
 	// ----------------------
 	
+	/** HTML file name */
 	private String _htmlfile;
+	/** HTML file content as String */
 	private String _htmlContent;
 	
 	// ----------------------
@@ -23,7 +25,7 @@ public class HTMLFile {
 	// ----------------------
 	
 	/** Creates new HTML file with empty content
-	* @param htmlfile	file name
+	* @param htmlfile	(String) HTML file name
 	*/
 	public HTMLFile(String htmlfile) {
 		_htmlfile = htmlfile;
@@ -36,7 +38,7 @@ public class HTMLFile {
 		
 	
 	/** Dump HTML content as String (mainly used for debugging in console).
-	* @return	TML content as String
+	* @return	HTML content as String
 	*/
 	public String dump() {
 		return _htmlContent;
@@ -71,7 +73,7 @@ public class HTMLFile {
 	}
 	
 	/** Init HTML file (creates title, favicon, style and head)
-	* @param String	HTML Page title
+	* @param title	(String) HTML page title
 	*/
 	public void initFile(String title) {
 		
@@ -85,14 +87,15 @@ public class HTMLFile {
 	}
 	
 	/** Add file entry to HTML index file
-	* @param String	File path
+	* @param filepath	(String) File entry path
 	*/
 	public void addFileEntry(String filepath) {
 		_htmlContent += "<a href=\"" + filepath +  "\">" + filepath.substring(filepath.lastIndexOf("\\") + 1) + "</a><br/>\n";
 	}
 	
 	/** Add directory entry to HTML index file
-	* @param String	Directory path
+	* @param dirname	(String) Directory entry path
+	* @param level		(int) Directory depth
 	*/
 	public void addDirectory(String dirname, int level) {
 		
@@ -117,7 +120,7 @@ public class HTMLFile {
 	// ----------------------
 	
 	/** Add HTML tile
-	* @param String	Title
+	* @param title	(String) HTML page title
 	*/
 	private void addTitle(String title) {
 		_htmlContent+= "<title>" + title.substring(title.lastIndexOf("\\")) + "</title>\n";
@@ -150,7 +153,7 @@ public class HTMLFile {
 	}
 	
 	/** Add HTML header (incl. page title)
-	* @param String	Title
+	* @param title	(String) HTML page title
 	*/
 	private void addHeader(String title) {
 		_htmlContent += "<body>\n<header>";
