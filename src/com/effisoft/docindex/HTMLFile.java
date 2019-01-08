@@ -19,6 +19,10 @@ public class HTMLFile {
 	private String _htmlfile;
 	/** HTML file content as String */
 	private String _htmlContent;
+	/** Number of file entries in index */
+	private int _numberOfFiles;
+	/** Number of directory entries in index */
+	private int _numberOfDirectories;
 	
 	// ----------------------
 	// Constructor
@@ -30,6 +34,8 @@ public class HTMLFile {
 	public HTMLFile(String htmlfile) {
 		_htmlfile = htmlfile;
 		_htmlContent = "";
+		_numberOfFiles = 0;
+		_numberOfDirectories = 0;
 	}
 	
 	// ----------------------
@@ -84,6 +90,9 @@ public class HTMLFile {
 		addStyle();
 		addHeader(title);
 		
+		_numberOfFiles = 0;
+		_numberOfDirectories = 0;
+		
 	}
 	
 	/** Add file entry to HTML index file
@@ -91,6 +100,7 @@ public class HTMLFile {
 	*/
 	public void addFileEntry(String filepath) {
 		_htmlContent += "<a href=\"" + filepath +  "\">" + filepath.substring(filepath.lastIndexOf("\\") + 1) + "</a><br/>\n";
+		_numberOfFiles++;
 	}
 	
 	/** Add directory entry to HTML index file
@@ -107,6 +117,8 @@ public class HTMLFile {
 		closeMarkup = "</h" + level + ">";
 		
 		_htmlContent += openMarkup + dirname.substring(dirname.lastIndexOf("\\")) + closeMarkup + "\n";
+	
+		_numberOfDirectories++;
 	}
 	
 	/** Close HTML file (add footer)
@@ -167,10 +179,15 @@ public class HTMLFile {
 		
 		_htmlContent += "</article>\n</section>\n";
 		
+		System.out.println("Indexed directories: " + _numberOfDirectories);
+		System.out.println("Indexed files: " + _numberOfFiles);
+		
+		_htmlContent += "<footer>\n" + _numberOfDirectories + " directories - " + _numberOfFiles + " files<br //>\n";
+		
 		// Compute index generation date
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		Date date = new Date();
-		_htmlContent += "<footer>Last generated on " + dateFormat.format(date) + "</footer>\n";
+		_htmlContent += "Last generated on " + dateFormat.format(date) + "\n</footer>\n";
 		
 		_htmlContent += "</body>\n</html>";
 	}
