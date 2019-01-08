@@ -8,12 +8,15 @@ DocumentIndex is a command-line java tool which scans all files in a given input
 ### Command line syntax
 
 We asume the project has previously been exported as the runnable JAR file `buildindex.jar`. 
-###### Standard call (list all documents)
+###### Standard call
+List all documents.  
 `java -jar buildindex.jar <input-directory> <output-html-file>`
-###### PDF Only option (list only PDF documents)
-`java -jar buildindex.jar <input-directory> <output-html-file> -onlypdf`
-###### No PDF option (list alll non-PDF documents)
-`java -jar buildindex.jar <input-directory> <output-html-file> -nopdf`
+###### Filetype whitelist handling
+Include in index listed file types (slash-separated) only.  
+`java -jar buildindex.jar <input-directory> <output-html-file> -include pdf/html`
+###### Filetype blacklist handling
+Exclude from index listed file types. (slash-separated)  
+`java -jar buildindex.jar <input-directory> <output-html-file> -exclude doc/docx/jar/bat`
 
 ### Windows desktop executable
 
