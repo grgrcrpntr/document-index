@@ -77,11 +77,10 @@ public class SimpleFileList {
 					htmlFile.addDirectory(file, level);				
 				}
 				else {
-					// Filters for PDF and non-PDF documents
-					if (parameters._allowPDF && file.endsWith(".pdf")) {
-						htmlFile.addFileEntry(file);
-					}
-					if (parameters._allowNonPDF && !file.endsWith(".pdf")) {
+					// Get file extension
+					String filetype = file.substring(file.lastIndexOf(".") + 1);
+					// Add to index if file type is allowed
+					if (parameters.isFileTypeAllowed(filetype)) {
 						htmlFile.addFileEntry(file);
 					}
 				}
