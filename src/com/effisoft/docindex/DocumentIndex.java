@@ -31,9 +31,14 @@ public class DocumentIndex {
 			// Dump HTML file to disk
 			htmlFile.toDisk();
 			
+		} catch (IllegalArgumentException e) {
+			// If illegal argument usage, print error message in console
+			System.out.println(e.getMessage());
+	  
 		} catch (Exception e) {
-	        e.printStackTrace();
-	    }
+	    	e.printStackTrace();
+	 
+		}
 		
 	}
 
